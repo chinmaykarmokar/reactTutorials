@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Cookie&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Niconne&display=swap');
+
+
+.App {
+  text-align: center !important;
+}
+
+.red {
+  color: red;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.Button{
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid blue;
+}
