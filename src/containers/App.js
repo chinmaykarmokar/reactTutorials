@@ -3,6 +3,9 @@ import Persons from '../components/Persons/Persons'
 import Cockpit from '../components/Cockpit/cockpit'
 import styled from 'styled-components';
 import myClasses from './App.css';
+import withClass from '../hoc/withClass'
+import Auix from '../hoc/Auix'
+import AuthContext from '../context/auth-context'
 
 class App extends React.Component{
   constructor(props){
@@ -14,7 +17,8 @@ class App extends React.Component{
         { name : "Seema" , age : 46 , font : "Niconne"}
       ],
       showPersons: false,
-      showCockpit: true
+      showCockpit: true,
+      authenticated : false
     }
   }
 
@@ -33,6 +37,12 @@ class App extends React.Component{
     })
   }
 
+  loginHandler = () => {
+  	this.setState({
+  		authenticated : true
+  	})
+  }
+
   render(){
 
     let persons = null;
@@ -43,6 +53,7 @@ class App extends React.Component{
         <Persons
           persons = {this.state.persons}
           changed = {this.nameChangeHandler}
+          isAuthenticated = {this.state.authenticated}
         />
       </div> 
       ) 
@@ -52,12 +63,16 @@ class App extends React.Component{
     let classes = ['red','bold'].join(' ');
 
     return(
-      <div className = "App">
+      <Auix className = "App">
       <button onClick = {() => {
           this.setState({showCockpit:false});
       }}>
       Hide Cockpit
       </button>
+      <AuthContext.Provider value = {{
+      	authenticated : this.state.authenticated, 
+      	login : this.loginHandler
+      }}>
       {this.state.showCockpit ? (
         <Cockpit
           showPersons = {this.state.showPersons}
@@ -66,9 +81,10 @@ class App extends React.Component{
         />
       ) : null}
         {persons}
-      </div>
+       </AuthContext.Provider> 
+      </Auix>
     )
   }
 }
 
-export default App;
+export default withClass(App);

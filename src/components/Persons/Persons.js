@@ -27,15 +27,16 @@ class Persons extends PureComponent {
 	}*/
 
 	render(){
-		return(
+		return( 
 			this.props.persons.map(person => {
 		    	return <Person
 		        	name = {person.name}
 		        	age = {person.age}
 		        	font = {person.font}
 		        	changed = {this.props.changed}
-		       	/>
-		 	})
+		        	isAuth = {this.props.isAuthenticated}
+		       		/>
+		 	})	
 		) 	
 	}
 }
